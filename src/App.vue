@@ -1,5 +1,5 @@
 <template>
-    <div class="font-roboto h-[450vh] bg-weather-primary">
+    <div class="font-roboto min-h-screen bg-weather-primary">
         <SiteNavigation />
         <router-view></router-view>
     </div>
