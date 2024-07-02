@@ -1,7 +1,13 @@
-<script setup lang="ts"></script>
-
 <template>
-  <router-view></router-view>
+    <div class="font-roboto min-h-screen bg-weather-primary">
+        <SiteNavigation />
+        <router-view></router-view>
+    </div>
 </template>
 
-<style scoped></style>
+<script lang="ts">
+import SiteNavigation from './components/SiteNavigation.vue'
+export default {
+    components: { SiteNavigation },
+}
+</script>
