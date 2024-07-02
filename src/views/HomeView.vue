@@ -1,10 +1,18 @@
 <template>
-  <div></div>
+  <div>
+    <h1 class="text-5xl">
+      {{ user }}
+    </h1>
+  </div>
 </template>
 
 <script>
 export default {
-  data() {},
+  data() {
+    return {
+      user: "Bruno",
+    };
+  },
 };
 </script>
 
