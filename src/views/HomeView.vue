@@ -58,7 +58,7 @@ const queryTimeout = ref<ReturnType<typeof setTimeout> | null>(null)
 const mapBoxSearchResults = ref<MapBoxFeature[] | null>(null)
 const searchError = ref<boolean>(false)
 
-const { push } = useRouter()
+const router = useRouter()
 
 const getSearchResults = () => {
     if (queryTimeout.value) {
@@ -73,6 +73,7 @@ const getSearchResults = () => {
                 )
 
                 mapBoxSearchResults.value = data.features
+                searchError.value = false
             } catch (error) {
                 console.error('Error fetching search results:', error)
                 mapBoxSearchResults.value = null
@@ -84,7 +85,7 @@ const getSearchResults = () => {
 
 const previewCity = (searchResult) => {
     const [city, state] = searchResult.place_name.split(', ')
-    push({
+    router.push({
         name: 'cityView',
         params: { state, city },
         query: {
