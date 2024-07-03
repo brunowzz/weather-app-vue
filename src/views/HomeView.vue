@@ -26,6 +26,7 @@
                     <li
                         v-for="searchResult in mapBoxSearchResults"
                         :key="searchResult.id"
+                        @click="previewCity(searchResult)"
                         class="cursor-pointer py-2"
                     >
                         {{ searchResult.place_name }}
@@ -38,6 +39,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import axios from 'axios'
 
 interface MapBoxFeature {
@@ -55,6 +57,8 @@ const searchQuery = ref<string | null>(null)
 const queryTimeout = ref<ReturnType<typeof setTimeout> | null>(null)
 const mapBoxSearchResults = ref<MapBoxFeature[] | null>(null)
 const searchError = ref<boolean>(false)
+
+const { push } = useRouter()
 
 const getSearchResults = () => {
     if (queryTimeout.value) {
@@ -76,5 +80,18 @@ const getSearchResults = () => {
             }
         }
     }, 500)
+}
+
+const previewCity = (searchResult) => {
+    const [city, state] = searchResult.place_name.split(', ')
+    push({
+        name: 'cityView',
+        params: { state, city },
+        query: {
+            lat: searchResult.geometry.coordinates[1],
+            lng: searchResult.geometry.coordinates[0],
+            preview: true,
+        },
+    })
 }
 </script>
