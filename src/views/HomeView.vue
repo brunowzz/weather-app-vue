@@ -80,7 +80,7 @@ const getSearchResults = () => {
                 searchError.value = true
             }
         }
-    }, 500)
+    }, 300)
 }
 
 const previewCity = (searchResult) => {
