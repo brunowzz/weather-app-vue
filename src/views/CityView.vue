@@ -1,12 +1,14 @@
 <template>
-    <div>
+    <main>
         <Suspense>
             <AsyncCity />
             <template #fallback>
-                <p>Loading...</p>
+                <section class="container">
+                    <p>Loading...</p>
+                </section>
             </template>
         </Suspense>
-    </div>
+    </main>
 </template>
 
 <script setup lang="ts">
