@@ -34,6 +34,15 @@
                 </template>
             </ul>
         </div>
+
+        <div class="mt-12 flex flex-col gap-4">
+            <Suspense>
+                <CityList />
+                <template #fallback>
+                    <p>Loading...</p>
+                </template>
+            </Suspense>
+        </div>
     </main>
 </template>
 
@@ -41,6 +50,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
+import CityList from '../components/CityList.vue'
 
 interface MapBoxFeature {
     id: string
