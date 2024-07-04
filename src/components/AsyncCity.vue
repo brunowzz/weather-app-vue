@@ -97,14 +97,23 @@
                 </div>
             </div>
         </div>
+
+        <div
+            class="flex cursor-pointer items-center gap-2 py-12 text-white duration-150 hover:text-red-500"
+            @click="removeCity"
+        >
+            <i class="fa-solid fa-trash"></i>
+            <p>Remove City</p>
+        </div>
     </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
 import axios from 'axios'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
+const router = useRouter()
 const route = useRoute()
 const dayMonth = ref<null | string>(null)
 const hour = ref<null | string>(null)
@@ -142,4 +151,13 @@ dayMonth.value = new Date(weatherData.currentTime).toLocaleDateString('en-us', {
 hour.value = new Date(weatherData.currentTime).toLocaleTimeString('en-us', {
     timeStyle: 'short',
 })
+
+const removeCity = () => {
+    const cities = JSON.parse(localStorage.getItem('savedCities'))
+    const updatedCities = cities.filter((city) => city.id !== route.query.id)
+    localStorage.setItem('savedCities', JSON.stringify(updatedCities))
+    router.push({
+        name: 'home',
+    })
+}
 </script>
